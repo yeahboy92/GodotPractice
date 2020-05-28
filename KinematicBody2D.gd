@@ -18,6 +18,12 @@ func _physics_process(delta):
 		motion.y = -200
 	else:
 		motion.y = 0
+		
+	#if Input.is_action_pressed("ui_jump"):
+	#	initialHeight = motion.y
+	#	jumpHeight = 500
+	#	if motion.y < (initalHeight + jumpHeight):
+	#		motion.y = jumpHeight
 	
 	move_and_slide(motion)
 

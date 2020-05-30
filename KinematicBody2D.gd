@@ -1,9 +1,13 @@
 extends KinematicBody2D
 
 var motion = Vector2()
+var up = Vector2(0, -1)
+var gravity = -500
 
 
 func _physics_process(delta):
+	if not is_on_floor():
+		motion.y -= gravity * delta
 	
 	if Input.is_action_pressed("ui_right"):
 		motion.x = 200
@@ -16,16 +20,13 @@ func _physics_process(delta):
 		motion.y = 200
 	elif Input.is_action_pressed("ui_up"):
 		motion.y = -200
-	else:
-		motion.y = 0
-		
-	#if Input.is_action_pressed("ui_jump"):
-	#	initialHeight = motion.y
-	#	jumpHeight = 500
-	#	if motion.y < (initalHeight + jumpHeight):
-	#		motion.y = jumpHeight
 	
-	move_and_slide(motion)
+		
+	if is_on_floor():
+		if Input.is_action_just_pressed("ui_jump"):
+			motion.y = -500
+	
+	motion = move_and_slide(motion, up)
 
 	
 	pass
